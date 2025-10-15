@@ -3,7 +3,7 @@ import com.kms.katalon.core.util.KeywordUtil
 def v = new Date().getTime()
 if (v % 2 != 0) {
 	KeywordUtil.markFailed("${v} is not even")
-} else {
+} else {s
 	KeywordUtil.logInfo("${v} is even")
 }
 
