@@ -1,4 +1,22 @@
-== Lorem ipsum
+:REPOSITORY_URL: https://github.com/kazurayam/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name
+:PAGES_URL: https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name
+
+== Image index
+
+=== step1
+
+image::{PAGES_URL}/images/step1.png[]
+
+=== step2
+
+image::{PAGES_URL}/images/step2.png[]
+
+=== step3
+
+image::{PAGES_URL}/images/step3.png[]
+
+
+== iLorem ipsum
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 

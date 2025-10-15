@@ -1,4 +1,24 @@
-# Lorem ipsum
+# Image index
+
+## step1
+
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step1.png" alt="step1" />
+</figure>
+
+## step2
+
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step2.png" alt="step2" />
+</figure>
+
+## step3
+
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step3.png" alt="step3" />
+</figure>
+
+## iLorem ipsum
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
