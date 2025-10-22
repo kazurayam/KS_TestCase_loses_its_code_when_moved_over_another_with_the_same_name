@@ -1,0 +1,6 @@
+$ ls -la Scripts/main/TC1
+total 16
+drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 17:16 .
+drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 21:18 ..
+-rw-r--r--@ 1 kazuakiurayama  staff   245 10 22 08:01 Script1761087607376.groovy
+-rw-r--r--@ 1 kazuakiurayama  staff  1410 10 23 08:41 Script1761132105250.groovy

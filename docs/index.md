@@ -244,20 +244,58 @@ As you see, both test cases shows the empty scripts. I lost my state-of-the-art 
 
 ### step8
 
-I guessed that both windows were opening the same script file `Test Cases/main/TC1/Script1761132105250.groovy`. I checked it.
+I edited and saved the `Test Cases/main/TC1 (1)` to add a line of code:
 
-Before I edit the file, the timestamp was as follows:
-```
-$ ls -la Scripts/main/TC1
-total 16
-drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 17:16 .
-drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 21:18 ..
--rw-r--r--@ 1 kazuakiurayama  staff   245 10 22 08:01 Script1761087607376.groovy
--rw-r--r--@ 1 kazuakiurayama  staff  1243 10 22 20:21 Script1761132105250.groovy
-```
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step8.png" alt="step8" />
+</figure>
 
-I opened the `Test Cases/main/TC1 (1)` using Katalon Studio Editor, edited it a bit, and saved it.
+I checked the filesystem again.
 
+    $ tree Scripts Test\ Cases
+    Scripts
+    └── main
+        ├── TC1
+        │   ├── Script1761087607376.groovy
+        │   └── Script1761132105250.groovy
+        └── TC1 (1)
+            └── Script1761135512422.groovy
+    Test Cases
+    └── main
+        ├── TC1 (1).tc
+        └── TC1.tc
+
+    6 directories, 5 files
+
+The `Test Cases/main/TC1 (1)` has got a Groovy script file `Script1761135512422.groovy`.
+
+### step9
+
+I checked the timestamp of the files in the `Test Cases/main/TC1` folder:
+
+    $ ls -la Scripts/main/TC1
+    total 16
+    drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 17:16 .
+    drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 21:18 ..
+    -rw-r--r--@ 1 kazuakiurayama  staff   245 10 22 08:01 Script1761087607376.groovy
+    -rw-r--r--@ 1 kazuakiurayama  staff  1243 10 22 20:21 Script1761132105250.groovy
+
+I edited and saved the `Test Cases/main/TC1 (1)` to add a few lines of code:
+
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step9.png" alt="step9" />
+</figure>
+
+And I checked the timestamp of the files in the `Test Cases/main/TC1` folder again:
+
+    $ ls -la Scripts/main/TC1
+    total 16
+    drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 17:16 .
+    drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 21:18 ..
+    -rw-r--r--@ 1 kazuakiurayama  staff   245 10 22 08:01 Script1761087607376.groovy
+    -rw-r--r--@ 1 kazuakiurayama  staff  1410 10 23 08:41 Script1761132105250.groovy
+
+I could clearly see that the `Script1761132105250.groovy` file was updated, while the `Script1761087607376.groovy` file remained unchanged. This means that the `Test Cases/main/TC1` is linked to the `Script1761132105250.groovy` file. The `Script1761087607376.groovy` will be left there forever as an orphaned file.
 
 ## Conclusion
 
