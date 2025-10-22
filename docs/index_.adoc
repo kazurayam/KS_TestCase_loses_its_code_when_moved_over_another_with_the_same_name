@@ -109,9 +109,12 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 ----
 
-Obviously this was completely different from the `Script1761087607376.groovy` file. This means, I lost the code contained in the `Test Cases/main/TC1`. Katalon Studio threw my valuable code away.
+Obviously this was completely different from the `Script1761087607376.groovy` file. This means, I lost the code contained in the `Test Cases/main/TC1`. This is too bad. Katalon Studio threw my valuable code away.
 
-=== stepS1
+=== step4
+
+I did a few more steps for interest. I moved the `Test Cases/TC1 (1)` back to the `Test Cases/main` folder by drag-and-drop.
+
 
 === stepS2
 
