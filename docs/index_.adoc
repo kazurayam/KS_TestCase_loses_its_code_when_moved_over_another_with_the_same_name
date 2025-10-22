@@ -12,7 +12,7 @@ I used Katalon Studio v10.3.2 on macOS 15.6.1
 
 == Problem to solve
 
-I often make sub folders in the Test Cases tree to locate my test cases. I do change the name of my testcases. I do change the name of sub folders. I even move my testcases from a folder to another. I repeat such "refactoring" to seak for the best state of the Test Cases tree. During such refactoring, I encountered a serious defect of Katalon Studio.
+In my Katalon Studio projects, I often make sub folders in the Test Cases tree to locate my test cases. I do change the name of my testcases. I do change the name of sub folders. I even move my testcases from a folder to another. I repeat such "refactoring" to seak for the best state of the Test Cases tree. During such refactoring, I encountered a serious defect of Katalon Studio.
 
 == Description of the issue
 
@@ -44,19 +44,18 @@ ____
 What is `1761087607376` as a part of the file name? It is a timestamp representing the moment when the script file was created. Katalon Studio uses this timestamp to uniquely identify each script file.
 ____
 
-[/quote]
 
-Also, please note that a folder that represents a test case should contain only a single Groovy script file. If there are multiple Groovy script files in a test case folder, Katalon Studio will only recognize one of them, and the others will be ignored. Which one is recognized? --- I don't know. Only the Katalon developer knows.
+Also, please note that a folder that represents a test case should contain only a single Groovy script file. If there are multiple Groovy script files in a test case folder, Katalon Studio will only recognize one of them, and the others will be ignored. Which one is recognized?I don't know the rule. Only the Katalon developers would know.
 
 === step2
 
-Next, I copied the `Test Cases/main/TC1` to make another test case `Test Cases/TC1`.
+I copied the `Test Cases/main/TC1` to make another test case `Test Cases/TC1`.
 
 image::{PAGES_URL}/images/step2.png[]
 
 I copied manually on the Katalon Studio GUI. I right-clicked over the `Test Cases/main/TC`, selected the "Copy" menu. Then I left-clicked the `Test Cases` foldr, right-click it, chose the "Paste" menu. Then I got a new test case `Test Cases/TC1`. It contained the same Groovy script code as the original `Test Cases/main/TC1`.
 
-Now, how the filesystem look like?
+Now, how the filesystem looks like?
 
 [source,shell]
 ----
@@ -68,7 +67,7 @@ OK. There is no surprise.
 
 === step3
 
-Then, I moved the `Test Cases/TC1` into the `Test Cases/main` folder. I did it by drag-and-drop on the Katalon Studio GUI. I dragged the `Test Cases/main/TC1` and dropped it onto the `Test Cases` folder. This operation caused a name collision. The `Test Case` folder can not hold two test cases with the same name `TC1`. Katalon Studio created a new test case named `Test Cases/TC1 (1)`, which corresponds to the previous `Test Cases/main/TC1`. Now the `Test Cases/main` folder contains no test cases.
+I moved the `Test Cases/TC1` into the `Test Cases/main` folder. I did it by drag-and-drop on the Katalon Studio GUI. I dragged the `Test Cases/main/TC1` and dropped it onto the `Test Cases` folder. This operation caused a name collision. The `Test Case` folder can not hold two test cases with the same name `TC1`. Katalon Studio created a new test case named `Test Cases/TC1 (1)`, which corresponds to the previous `Test Cases/main/TC1`. Now the `Test Cases/main` folder contains no test cases.
 
 I did not open the new `Test Cases/TC1 (1)` with the Test Case Editor yet.
 
@@ -120,9 +119,7 @@ Obviously this was completely different from the `Script1761087607376.groovy` fi
 
 === step4
 
-I did a few more steps for interest.
-
-I moved the `Test Cases/TC1 (1)` back to the `Test Cases/main` folder by drag-and-drop.
+I did a few more steps. I moved the `Test Cases/TC1 (1)` back to the `Test Cases/main` folder by drag-and-drop.
 
 image::{PAGES_URL}/images/step4.png[]
 
@@ -134,7 +131,7 @@ $ tree Scripts Test\ Cases
 include::console/step4.txt[]
 ----
 
-This is OK. The Groovy script file `Script1761132105250.groovy` was moved into the folder `Scripts/main/TC1 (1)`. No surprise.
+The Groovy script file `Script1761132105250.groovy` was moved into the folder `Scripts/main/TC1 (1)`. This is OK. No surprise.
 
 === step5
 
@@ -154,7 +151,7 @@ This is OK. No surprise.
 
 === step6
 
-Finally, I cliked the `Test Cases/TC1` and drag-and-drop it into the `Test Cases/main` folder. I expected that Katalon Studio would create a new `Test Cases/main/TC1 (1)` as it did in the step3.
+I clicked the `Test Cases/TC1` and drag-and-drop it into the `Test Cases/main` folder. I expected that Katalon Studio would create a new `Test Cases/main/TC1 (1)` as it did in the step3.
 
 Yes, Katalon Studio created the `Test Cases/main/TC1 (1)`. The `Test Cases/TC1` disappered.
 
@@ -169,23 +166,23 @@ $ tree Scripts Test\ Cases
 include::console/step6.txt[]
 ----
 
-What is this! I am totally confused. I found the `Scripts/main/TC1` folder contained 2 Groovy script files! I believe that this situation must not be possible!
+What is this! I am totally confused. I found **the `Scripts/main/TC1` folder contained 2 Groovy script files!** I believe that this situation must not be possible!
 
 === step7
 
-The final question: if I open the `Test Cases/main/TC1` with the Test Case Editor, which Groovy script will be shown?
+The final question: if I open the `Test Cases/main/TC1` and the `Test Cases/main/TC1 (1)`  with the Test Case Editor, which Groovy script will be shown?
 
 See the following screenshot where I opened 2 test cases `Test Cases/main/TC1` and `Test Cases/main/TC1 (1)` side by side.
 
 image::{PAGES_URL}/images/step7.png[]
 
-As you see, both test cases shows the empty scripts. I lost my valuable state-of-the-art script completely. Katalon Studio threw it away!
+As you see, both test cases shows the empty scripts. I lost my state-of-the-art script completely. Katalon Studio threw it away! What a scam!
 
 == Conclusion
 
 Katalon,
 
-Please fix this bug. This issue as been left unresolved for years (see https://forum.katalon.com/t/bug-failed-renaming-test-case-deletes-content/9835).
+Please fix the bugs. Review the step3 and the step6. These issues as been left unresolved long for years (see https://forum.katalon.com/t/bug-failed-renaming-test-case-deletes-content/9835). I hope you will take this issue seriously and fix it as soon as possible. Many Katalon Studio users may have lost their valuable test case codes unknowingly because of these bugs.
 
 
 
