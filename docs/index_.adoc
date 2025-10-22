@@ -1,9 +1,24 @@
 :REPOSITORY_URL: https://github.com/kazurayam/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name
 :PAGES_URL: https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name
 
-== Image index
+= Test Case loses its code when moved over another Test Case with the same name
 
-=== step1
+I am going to retell my link:https://forum.katalon.com/t/test-case-loses-its-code-when-moved-over-another-test-case-with-the-same-name/183734[previous post] with more details.
+
+I used Katalon Studio v10.3.2 on macOS 15.6.1
+
+== Problem to solve
+
+I often make sub folders in the Test Cases tree to locate my test cases. I do change the name of my testcases. I do change the name of sub folders. I even move my testcases from a folder to another. I repeat such "refactoring" to seak for the best state of the Test Cases tree. During such refactoring, I encountered a serious defect of Katalon Studio.
+
+== step1
+
+Initially, I had a testcase Test Cases/main/TC1. The code was as follows:
+
+[source,groovy]
+----
+include::../Scripts/main/
+----
 
 image::{PAGES_URL}/images/step1.png[]
 
