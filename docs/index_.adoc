@@ -152,3 +152,28 @@ include::console/step5.txt[]
 
 This is OK. No surprise.
 
+=== step6
+
+Finally, I cliked the `Test Cases/TC1` and drag-and-drop it into the `Test Cases/main` folder. I expected that Katalon Studio would create a new `Test Cases/main/TC1 (1)` as it did in the step3.
+
+Yes, Katalon Studio created the `Test Cases/main/TC1 (1)`. The `Test Cases/TC1` disappered.
+
+image::{PAGES_URL}/images/step6.png[]
+
+I checked the filesystem.
+
+
+[source,shell]
+----
+$ tree Scripts Test\ Cases
+include::console/step6.txt[]
+----
+
+What is this! I am totally confused. I found the `Scripts/main/TC1` folder contained 2 Groovy script files! I believe that this situation must not be possible!
+
+
+
+
+
+
+
