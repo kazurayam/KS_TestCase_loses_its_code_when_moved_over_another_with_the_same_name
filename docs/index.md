@@ -8,9 +8,11 @@ I used Katalon Studio v10.3.2 on macOS 15.6.1
 
 I often make sub folders in the Test Cases tree to locate my test cases. I do change the name of my testcases. I do change the name of sub folders. I even move my testcases from a folder to another. I repeat such "refactoring" to seak for the best state of the Test Cases tree. During such refactoring, I encountered a serious defect of Katalon Studio.
 
-## step1
+## Description of the issue
 
-Initially, I had a testcase Test Cases/main/TC1. The code was as follows:
+### step1
+
+Initially, I had a testcase `Test Cases/main/TC1`. The code was as follows:
 
     import com.kms.katalon.core.util.KeywordUtil
 
@@ -24,23 +26,56 @@ Initially, I had a testcase Test Cases/main/TC1. The code was as follows:
     Random rand = new Random()
     Thread.sleep(rand.nextInt(999))
 
+The script itself is not important here. What matters is that the Test Case `Test Cases/main/TC1` had some Groovy Script code.
+
 <figure>
 <img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step1.png" alt="step1" />
 </figure>
 
-You may not be aware of, Katalon Studio GUI presents an illusion that a Test Case is a single object that holds a Groovy Script and several metadata such as "Description", "Tags", "Variables", and so on. However, in the file system, a Test Case is represented by a combination of two folders (`Test Cases` and `Scripts`) and files contained there.
-I inspected the file/folder tree of the project using the [tree](https://linux.die.net/man/1/tree) command:
+Here’s a fact you might not know: Katalon Studio’s GUI gives the illusion that a test case is a single object containing a Groovy script and metadata like “descriptions,” “tags,” and “variables.” However, on the filesystem, test cases are implemented as a combination of two folders (`Test Cases` and `Scripts`) and the files they contain. I inspected the file/folder tree of the project using the [tree](https://linux.die.net/man/1/tree) command:
 
     $ tree Scripts Test\ Cases
-    include::./console/step1.txt
+    Scripts
+    └── main
+        └── TC1
+            └── Script1761087607376.groovy
+    Test Cases
+    └── main
+        └── TC1.tc
 
-Here you can clearly see that the Test Case `Test Cases/main/TC1` is represented by two folders: `Test Cases/main/TC1` and `Scripts/main/TC1`. The Groovy Script file is stored in the `Scripts/main/TC1` folder.
+    5 directories, 2 files
+
+Here you can clearly see that the Test Case `Test Cases/main/TC1` is represented by two folders: `Test Cases/main/TC1` and `Scripts/main/TC1`. The Groovy Script file is stored as the `Scripts/main/TC1/Script1761087607376.groovy`.
+
+> What is `1761087607376` as a part of the file name? It is a timestamp representing the moment when the script file was created. Katalon Studio uses this timestamp to uniquely identify each script file.
 
 ### step2
+
+Next, I copied the `Test Cases/main/TC1` to make another test case `Test Cases/TC1`.
 
 <figure>
 <img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step2.png" alt="step2" />
 </figure>
+
+I copied manually on the Katalon Studio GUI. I right-clicked over the `Test Cases/main/TC`, selected the "Copy" menu. Then I left-clicked the `Test Cases` foldr, right-click it, chose the "Paste" menu. Then I got a new test case `Test Cases/TC1`. It contained the same Groovy script code as the original `Test Cases/main/TC1`.
+
+Now, how the filesystem look like?
+
+    $ tree Scripts Test\ Cases
+    Scripts
+    ├── main
+    │   └── TC1
+    │       └── Script1761087607376.groovy
+    └── TC1
+        └── Script1761087607376.groovy
+    Test Cases
+    ├── main
+    │   └── TC1.tc
+    └── TC1.tc
+
+    6 directories, 4 files
+
+OK. There is no surprise.
 
 ### step3
 
