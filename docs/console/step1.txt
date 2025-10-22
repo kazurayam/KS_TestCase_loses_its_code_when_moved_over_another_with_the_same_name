@@ -1,0 +1,9 @@
+Scripts
+└── main
+    └── TC1
+        └── Script1761087607376.groovy
+Test Cases
+└── main
+    └── TC1.tc
+
+5 directories, 2 files

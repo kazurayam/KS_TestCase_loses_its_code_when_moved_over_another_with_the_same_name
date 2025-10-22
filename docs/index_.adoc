@@ -17,10 +17,21 @@ Initially, I had a testcase Test Cases/main/TC1. The code was as follows:
 
 [source,groovy]
 ----
-include::../Scripts/main/
+include::../Scripts/main/TC1/Script1761087607376.groovy[]
 ----
 
 image::{PAGES_URL}/images/step1.png[]
+
+You may not be aware of, Katalon Studio GUI presents an illusion that a Test Case is a single object that holds a Groovy Script and several metadata such as "Description", "Tags", "Variables", and so on. However, in the file system, a Test Case is represented by a combination of two folders (`Test Cases` and `Scripts`) and files contained there.
+I inspected the file/folder tree of the project using the link:https://linux.die.net/man/1/tree[tree] command:
+
+[source,shell]
+----
+$ tree Scripts Test\ Cases
+include::./console/step1.txt
+----
+
+Here you can clearly see that the Test Case `Test Cases/main/TC1` is represented by two folders: `Test Cases/main/TC1` and `Scripts/main/TC1`. The Groovy Script file is stored in the `Scripts/main/TC1` folder.
 
 === step2
 
