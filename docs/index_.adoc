@@ -171,6 +171,21 @@ include::console/step6.txt[]
 
 What is this! I am totally confused. I found the `Scripts/main/TC1` folder contained 2 Groovy script files! I believe that this situation must not be possible!
 
+=== step7
+
+The final question: if I open the `Test Cases/main/TC1` with the Test Case Editor, which Groovy script will be shown?
+
+See the following screenshot where I opened 2 test cases `Test Cases/main/TC1` and `Test Cases/main/TC1 (1)` side by side.
+
+image::{PAGES_URL}/images/step7.png[]
+
+As you see, both test cases shows the empty scripts. I lost my valuable state-of-the-art script completely. Katalon Studio threw it away!
+
+== Conclusion
+
+Katalon,
+
+Please fix this bug. This issue as been left unresolved for years (see https://forum.katalon.com/t/bug-failed-renaming-test-case-deletes-content/9835).
 
 
 

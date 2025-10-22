@@ -1,5 +1,9 @@
 # Test Case loses its code when moved over another Test Case with the same name
 
+- author: kazurayam
+
+- date: 22 Oct 2025
+
 I am going to retell my [previous post](https://forum.katalon.com/t/test-case-loses-its-code-when-moved-over-another-test-case-with-the-same-name/183734) with more details.
 
 I used Katalon Studio v10.3.2 on macOS 15.6.1
@@ -49,6 +53,10 @@ Here you can clearly see that the Test Case `Test Cases/main/TC1` is represented
 
 > What is `1761087607376` as a part of the file name? It is a timestamp representing the moment when the script file was created. Katalon Studio uses this timestamp to uniquely identify each script file.
 
+\[/quote\]
+
+Also, please note that a folder that represents a test case should contain only a single Groovy script file. If there are multiple Groovy script files in a test case folder, Katalon Studio will only recognize one of them, and the others will be ignored. Which one is recognized? --- I don’t know. Only the Katalon developer knows.
+
 ### step2
 
 Next, I copied the `Test Cases/main/TC1` to make another test case `Test Cases/TC1`.
@@ -79,218 +87,164 @@ OK. There is no surprise.
 
 ### step3
 
+Then, I moved the `Test Cases/TC1` into the `Test Cases/main` folder. I did it by drag-and-drop on the Katalon Studio GUI. I dragged the `Test Cases/main/TC1` and dropped it onto the `Test Cases` folder. This operation caused a name collision. The `Test Case` folder can not hold two test cases with the same name `TC1`. Katalon Studio created a new test case named `Test Cases/TC1 (1)`, which corresponds to the previous `Test Cases/main/TC1`. Now the `Test Cases/main` folder contains no test cases.
+
+I did not open the new `Test Cases/TC1 (1)` with the Test Case Editor yet.
+
+I checked the filesystem. **I expected to find the Groovy script file `Scripts/TC1 (1)/Script1761087607376.groovy`. Surprisingly, it was missing!**
+
+    $ tree Scripts Test\ Cases
+    Scripts
+    ├── main
+    └── TC1
+        └── Script1761087607376.groovy
+    Test Cases
+    ├── main
+    ├── TC1 (1).tc
+    └── TC1.tc
+
+    5 directories, 3 files
+
+I double-clicked the `Test Cases/TC1_(1)` to open it with the Test Case Editor. The editor showed an empty script area. The Groovy script code was lost!
+
 <figure>
 <img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step3.png" alt="step3" />
 </figure>
 
-### stepS1
+I checked the filesystem again.
 
-### stepS2
+    $ tree Scripts Test\ Cases
+    Scripts
+    ├── main
+    ├── TC1
+    │   └── Script1761087607376.groovy
+    └── TC1 (1)
+        └── Script1761132105250.groovy
+    Test Cases
+    ├── main
+    ├── TC1 (1).tc
+    └── TC1.tc
 
-### stepS3
+    6 directories, 4 files
 
-## iLorem ipsum
+Ah, now I found a new Groovy script file `Scripts/TC1_(1)/Script1761132105250.groovy`. Its content was something like this:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+    import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+    import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+    import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+    import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+    import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+    import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
+    import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+    import com.kms.katalon.core.model.FailureHandling as FailureHandling
+    import com.kms.katalon.core.testcase.TestCase as TestCase
+    import com.kms.katalon.core.testdata.TestData as TestData
+    import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
+    import com.kms.katalon.core.testobject.TestObject as TestObject
+    import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+    import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+    import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+    import internal.GlobalVariable as GlobalVariable
+    import org.openqa.selenium.Keys as Keys
 
-### Ut enim ad minim veriam
+Obviously this was completely different from the `Script1761087607376.groovy` file. This means, I lost the code contained in the `Test Cases/main/TC1`. This is too bad. Katalon Studio threw my valuable code away.
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+### step4
 
-#### Duis aute irure dolor
+I did a few more steps for interest.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
-##### Excepteur sint occaecat cupidatat
-
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-## Quo usque tandem abutere
-
-Quo usque tandem abutere, Catilina, patientia nostra?
-
-## Header with (& - \_ : ; ) non Latin Characters
-
-Quam diu etiam furor iste tuus nos eludet?
-
-## Source code inclusion example
-
-    #!/bin/bash
-
-    # Under the current working directory, convert all the files
-    # with name ending with `_.adoc` into `.md`.
-    # A file with name `*_.adoc` is an Asciidoc document file.
-    # A file with name `*.md` is a Markdown document file.
-    # E.g, `index_.adoc` will be converted into `index.md`
-    #
-    # However, ffiles with name which starts with with `_` will be ignored.
-    # E.g, `_index_.adoc` will be ignored.
-    #
-    # How to run this: in the command line, just type
-    #
-    #     `> ./adoc2md.sh`
-    #
-    # By specifying `-t` option in the command line,
-    #
-    #     `> ./adoc2md.sh -t`
-    #
-    # you can prepend a text segment into the output .md file:
-    #
-    # ```
-    # - Table of Contents
-    # {:toc}
-    #
-    # ```
-    # This text segment will affect the [Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll)
-    # used by GitHub Pages to generate a table of contents.
-    #
-
-    requireTOC=false
-
-    optstring="t"
-    while getopts ${optstring} arg; do
-      case ${arg} in
-        t)
-            requireTOC=true
-            ;;
-        ?)
-            ;;
-      esac
-    done
-
-    function processFile() {
-      fname=$1
-      #echo "fname=${fname}"
-      #  using Asciidoctor, convert a *.adoc file into a docbook in XML
-      md=${fname//adoc/md}
-      xml=${fname//adoc/xml}
-      echo "converting $fname into $md"
-      asciidoctor -b docbook -a leveloffset=+1 -o - "$fname" > "$xml"
-      # using Pandoc, generate a Markdown file without TOC
-      cat "$xml" | pandoc --markdown-headings=atx --wrap=preserve -t markdown_strict -f docbook - > "$md"
-      #echo deleting $xml
-      rm -f "$xml"
-
-      # We named `index_.adoc` rather than `index.adoc` because GitHub puts precedence to `index.adoc` over `index.md`. We want `index.md` to be presented first, not `*.adoc`. Therefore we named our adoc file with `*_.adoc` postfix.
-      # This trick required further treatment.
-      # `index_.adoc` will result `index_.adoc`. But we
-      # want the final result to be `index.md`.
-      # So, we will rename `*_.md` into `*.md`.
-      # in other words, chomp an underline character (_) before `.md``
-      # e.g,
-      #   ./index_.adoc    -> ./index.md
-      #   ./index-ja_.md -> ./index-ja.md
-      newmd=${md%_.md}.md
-      echo renaming $md to $newmd
-      mv $md $newmd
-
-      # Slightly modify the generated *.md file.
-      # Prepend a text segment:
-      # ```
-      # - Table of contents
-      # {:toc}
-      # ```
-      if [ $requireTOC = true ]; then
-        echo "- Table of contents" > temp.md
-        echo "{:toc}" >> temp.md
-        echo "" >> temp.md
-        cat $newmd >> temp.md
-        cat temp.md > $newmd
-        rm temp.md
-        echo prepended the TOC segement in $newmd
-      fi
-      # just a blank line to separate the *.adoc files processed
-      echo ""
-    }
-
-
-
-    # iterate over all *.adoc files
-    find . -iname "*_.adoc" -type f -maxdepth 1 -not -name "_*.adoc" | while read fname; do
-      processFile $fname
-    done
-
-## Diagram example
-
-Generated using [PlantUML](https://plantuml.com/ja/)
+I moved the `Test Cases/TC1 (1)` back to the `Test Cases/main` folder by drag-and-drop.
 
 <figure>
-<img src="https://kazurayam.github.io/adoc2md/diagrams/out/sequence/sequence.png" alt="sequence" />
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step4.png" alt="step4" />
 </figure>
 
-## 宮沢賢治の詩その1
+I checked the filesystem again.
 
-心象スケッチ　春と修羅
+    $ tree Scripts Test\ Cases
+    Scripts
+    ├── main
+    │   └── TC1 (1)
+    │       └── Script1761132105250.groovy
+    └── TC1
+        └── Script1761087607376.groovy
+    Test Cases
+    ├── main
+    │   └── TC1 (1).tc
+    └── TC1.tc
 
-    わたくしといふ現象は
-    仮定された有機交流電燈の
-    ひとつの青い照明です
-    （あらゆる透明な幽霊の複合体）
-    風景やみんなといつしよに
-    せはしくせはしく明滅しながら
-    いかにもたしかにともりつづける
-    因果交流電燈の
-    ひとつの青い照明です
-    （ひかりはたもち　その電燈は失はれ）
+    6 directories, 4 files
 
-    これらは二十二箇月の
-    過去とかんずる方角から
-    紙と鉱質インクをつらね
-    （すべてわたくしと明滅し
-    　みんなが同時に感ずるもの）
-    ここまでたもちつゞけられた
-    かげとひかりのひとくさりづつ
-    そのとほりの心象スケッチです
+This is OK. The Groovy script file `Script1761132105250.groovy` was moved into the folder `Scripts/main/TC1 (1)`. No surprise.
 
-## 宮沢賢治の詩その2
+### step5
 
-    雨ニモマケズ
-    風ニモマケズ
-    雪ニモ夏ノ暑サニモマケヌ
-    丈夫ナカラダヲモチ
-    欲ハナク
-    決シテ瞋ラズ
-    イツモシヅカニワラッテヰル
-    一日ニ玄米四合ト
-    味噌ト少シノ野菜ヲタベ
-    アラユルコトヲ
-    ジブンノカンジョウニ入レズニ
-    ヨクミキキシワカリ
-    ソシテワスレズ
-    野原ノ松ノ林ノ蔭ノ
-    小サナ萱ブキノ小屋にヰテ
-    東に病気ノコドモアレバ
-    行ッテ看病シテヤリ
-    西ニ疲レタ母アレバ
-    行ッテソノ稲ノ束ヲ負ヒ
-    南ニシニサウナ人アレバ
-    行ッテコハガラナクテモイゝトイヒ
-    北にケンクヮヤソショウガアレバ
-    ツマラナイカラヤメロとイヒ
-    ヒドリノトキハナミダヲナガし
-    サムサノナツハオロオロアルキ
-    ミンナニデクノボー トヨバレ
-    ホメラレモセズ
-    クニモサレズ
-    サウイフモノニ
-    ワタシハナリタイ
+I renamed the `Test Cases/main/TC1 (1)` to the `Test Cases/main/TC1` by a manual operation on the Katalon Studio.
 
-    南無無辺行菩薩
-    南無上行菩薩
-    南無多宝如来
-    南無妙法蓮華経
-    南無釈迦牟尼仏
-    南無浄行菩薩
-    南無安立行菩薩
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step5.png" alt="step5" />
+</figure>
 
-## Dolorem ipsum
+I checked the filesystem again.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Praesent tristique magna sit amet purus. Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus. In cursus turpis massa tincidunt dui ut. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper. Facilisis mauris sit amet massa vitae tortor condimentum. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Eu turpis egestas pretium aenean pharetra magna ac placerat. Nulla aliquet porttitor lacus luctus accumsan tortor posuere. Sit amet purus gravida quis blandit turpis cursus. Suspendisse sed nisi lacus sed. Laoreet non curabitur gravida arcu ac. Dolor sit amet consectetur adipiscing elit pellentesque. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat.
+    $ tree Scripts Test\ Cases
+    Scripts
+    ├── main
+    │   └── TC1
+    │       └── Script1761132105250.groovy
+    └── TC1
+        └── Script1761087607376.groovy
+    Test Cases
+    ├── main
+    │   └── TC1.tc
+    └── TC1.tc
 
-Praesent tristique magna sit amet purus gravida quis blandit turpis. Vitae congue mauris rhoncus aenean vel elit scelerisque mauris. Suspendisse faucibus interdum posuere lorem ipsum dolor sit. Sem integer vitae justo eget magna fermentum iaculis eu. Felis bibendum ut tristique et egestas. Vel orci porta non pulvinar neque laoreet. Ac tortor vitae purus faucibus ornare suspendisse sed. In mollis nunc sed id semper. Pellentesque id nibh tortor id aliquet lectus proin. Id faucibus nisl tincidunt eget nullam non nisi est. Senectus et netus et malesuada fames ac turpis egestas. Viverra vitae congue eu consequat ac. Vel pharetra vel turpis nunc eget lorem dolor sed viverra. Sodales ut eu sem integer vitae. Pharetra vel turpis nunc eget lorem. Nam at lectus urna duis convallis convallis tellus. Massa tempor nec feugiat nisl pretium fusce id velit ut. Et ultrices neque ornare aenean euismod elementum nisi. Ut morbi tincidunt augue interdum velit. Fermentum iaculis eu non diam phasellus vestibulum lorem sed risus.
+    6 directories, 4 files
 
-Et sollicitudin ac orci phasellus egestas tellus. Sit amet purus gravida quis blandit turpis cursus. Interdum varius sit amet mattis vulputate enim nulla aliquet. Quam id leo in vitae turpis massa sed elementum. Justo donec enim diam vulputate ut pharetra sit amet aliquam. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Leo integer malesuada nunc vel risus commodo viverra maecenas. Neque viverra justo nec ultrices dui sapien eget mi. Vel risus commodo viverra maecenas. Purus in massa tempor nec feugiat nisl pretium fusce. In nisl nisi scelerisque eu ultrices vitae. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac ut. Elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices sagittis orci a scelerisque purus semper. Aliquam sem et tortor consequat id. Sed vulputate odio ut enim blandit volutpat maecenas volutpat. Sed euismod nisi porta lorem mollis aliquam.
+This is OK. No surprise.
 
-Faucibus ornare suspendisse sed nisi lacus sed viverra. Duis at tellus at urna. Sem fringilla ut morbi tincidunt augue interdum. Proin libero nunc consequat interdum varius sit amet. Elementum facilisis leo vel fringilla est. In fermentum posuere urna nec tincidunt. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Arcu ac tortor dignissim convallis aenean et tortor. Odio facilisis mauris sit amet massa vitae tortor condimentum. At tellus at urna condimentum mattis pellentesque. Sed tempus urna et pharetra pharetra massa. Gravida quis blandit turpis cursus in hac. Enim neque volutpat ac tincidunt vitae semper quis lectus nulla. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
+### step6
 
-Aliquam purus sit amet luctus venenatis lectus magna. Vitae ultricies leo integer malesuada. Sit amet facilisis magna etiam tempor orci eu. Nec nam aliquam sem et tortor consequat id porta. Est ante in nibh mauris. Eu feugiat pretium nibh ipsum consequat nisl vel. Tristique risus nec feugiat in fermentum posuere urna nec tincidunt. Mauris vitae ultricies leo integer malesuada nunc vel risus commodo. Ultrices neque ornare aenean euismod elementum nisi quis eleifend quam. Lacus vel facilisis volutpat est velit egestas. Non curabitur gravida arcu ac tortor dignissim convallis aenean et. Volutpat est velit egestas dui id ornare arcu odio ut. Venenatis a condimentum vitae sapien pellentesque. Amet nisl suscipit adipiscing bibendum est ultricies integer. Lectus quam id leo in. Non curabitur gravida arcu ac tortor dignissim convallis aenean.
+Finally, I cliked the `Test Cases/TC1` and drag-and-drop it into the `Test Cases/main` folder. I expected that Katalon Studio would create a new `Test Cases/main/TC1 (1)` as it did in the step3.
+
+Yes, Katalon Studio created the `Test Cases/main/TC1 (1)`. The `Test Cases/TC1` disappered.
+
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step6.png" alt="step6" />
+</figure>
+
+I checked the filesystem.
+
+    $ tree Scripts Test\ Cases
+    Scripts
+    └── main
+        └── TC1
+            ├── Script1761087607376.groovy
+            └── Script1761132105250.groovy
+    Test Cases
+    └── main
+        ├── TC1 (1).tc
+        └── TC1.tc
+
+    5 directories, 4 files
+
+What is this! I am totally confused. I found the `Scripts/main/TC1` folder contained 2 Groovy script files! I believe that this situation must not be possible!
+
+### step7
+
+The final question: if I open the `Test Cases/main/TC1` with the Test Case Editor, which Groovy script will be shown?
+
+See the following screenshot where I opened 2 test cases `Test Cases/main/TC1` and `Test Cases/main/TC1 (1)` side by side.
+
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step7.png" alt="step7" />
+</figure>
+
+As you see, both test cases shows the empty scripts. I lost my valuable state-of-the-art script completely. Katalon Studio threw it away!
+
+## Conclusion
+
+Katalon,
+
+Please fix this bug. This issue as been left unresolved for years (see <https://forum.katalon.com/t/bug-failed-renaming-test-case-deletes-content/9835>).
