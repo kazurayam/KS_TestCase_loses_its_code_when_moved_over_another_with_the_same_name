@@ -13,25 +13,31 @@ I often make sub folders in the Test Cases tree to locate my test cases. I do ch
 
 == step1
 
-Initially, I had a testcase Test Cases/main/TC1. The code was as follows:
+Initially, I had a testcase `Test Cases/main/TC1`. The code was as follows:
 
 [source,groovy]
 ----
 include::../Scripts/main/TC1/Script1761087607376.groovy[]
 ----
 
+The script itself is not important here. What matters is that the Test Case `Test Cases/main/TC1` had some Groovy Script code.
+
 image::{PAGES_URL}/images/step1.png[]
 
-You may not be aware of, Katalon Studio GUI presents an illusion that a Test Case is a single object that holds a Groovy Script and several metadata such as "Description", "Tags", "Variables", and so on. However, in the file system, a Test Case is represented by a combination of two folders (`Test Cases` and `Scripts`) and files contained there.
-I inspected the file/folder tree of the project using the link:https://linux.die.net/man/1/tree[tree] command:
+Here's a fact you might not know: Katalon Studio's GUI gives the illusion that a test case is a single object containing Groovy scripts and metadata like “descriptions,” “tags,” and “variables.” However, on the filesystem, test cases are implemented as a combination of two folders (`Test Cases` and `Scripts`) and the files they contain. I inspected the file/folder tree of the project using the link:https://linux.die.net/man/1/tree[tree] command:
 
 [source,shell]
 ----
 $ tree Scripts Test\ Cases
-include::./console/step1.txt
+include::./console/step1.txt[]
 ----
 
-Here you can clearly see that the Test Case `Test Cases/main/TC1` is represented by two folders: `Test Cases/main/TC1` and `Scripts/main/TC1`. The Groovy Script file is stored in the `Scripts/main/TC1` folder.
+Here you can clearly see that the Test Case `Test Cases/main/TC1` is represented by two folders: `Test Cases/main/TC1` and `Scripts/main/TC1`. The Groovy Script file is stored as the `Scripts/main/TC1/Script1761087607376.groovy`.
+
+[quote]
+____
+What is `1761087607376` in the script file name? It is a timestamp representing the moment when the script file was created. Katalon Studio uses this timestamp to uniquely identify each script file.
+____
 
 === step2
 
