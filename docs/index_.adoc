@@ -16,6 +16,12 @@ image::{PAGES_URL}/images/step2.png[]
 image::{PAGES_URL}/images/step3.png[]
 
 
+=== stepS1
+
+=== stepS2
+
+=== stepS3
+
 == iLorem ipsum
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

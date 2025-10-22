@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC1 (1)</name>
+   <name>TC1</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>f7241dd9-4766-47e2-9598-b5c07bf5866e</testCaseGuid>
+   <testCaseGuid>59e0566a-7ff1-4540-84ab-893632060cce</testCaseGuid>
 </TestCaseEntity>
