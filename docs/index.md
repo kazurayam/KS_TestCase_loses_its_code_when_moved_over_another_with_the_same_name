@@ -240,7 +240,24 @@ See the following screenshot where I opened 2 test cases `Test Cases/main/TC1` a
 <img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step7.png" alt="step7" />
 </figure>
 
-As you see, both test cases shows the empty scripts. I lost my state-of-the-art script completely. Katalon Studio threw it away! What a scam!
+As you see, both test cases shows the empty scripts. I lost my state-of-the-art script completely.
+
+### step8
+
+I guessed that both windows were opening the same script file `Test Cases/main/TC1/Script1761132105250.groovy`. I checked it.
+
+Before I edit the file, the timestamp was as follows:
+```
+$ ls -la Scripts/main/TC1
+total 16
+drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 17:16 .
+drwxr-xr-x@ 4 kazuakiurayama  staff   128 10 22 21:18 ..
+-rw-r--r--@ 1 kazuakiurayama  staff   245 10 22 08:01 Script1761087607376.groovy
+-rw-r--r--@ 1 kazuakiurayama  staff  1243 10 22 20:21 Script1761132105250.groovy
+```
+
+I opened the `Test Cases/main/TC1 (1)` using Katalon Studio Editor, edited it a bit, and saved it.
+
 
 ## Conclusion
 

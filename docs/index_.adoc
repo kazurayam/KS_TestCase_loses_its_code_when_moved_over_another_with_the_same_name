@@ -176,7 +176,25 @@ See the following screenshot where I opened 2 test cases `Test Cases/main/TC1` a
 
 image::{PAGES_URL}/images/step7.png[]
 
-As you see, both test cases shows the empty scripts. I lost my state-of-the-art script completely. Katalon Studio threw it away! What a scam!
+As you see, both test cases shows the empty scripts. I lost my state-of-the-art script completely.
+
+=== step8
+
+I edited and saved the `Test Cases/main/TC1 (1)` to add a line of code:
+
+image::{PAGES_URL}/images/step8.png[]
+
+I checked the filesystem again.
+
+[source,shell]
+----
+$ tree Scripts Test\ Cases
+include::console/step8.txt[]
+----
+
+The `Test Cases/main/TC1 (1)` has got a Groovy script file `Script1761135512422.groovy`.
+
+
 
 == Conclusion
 
