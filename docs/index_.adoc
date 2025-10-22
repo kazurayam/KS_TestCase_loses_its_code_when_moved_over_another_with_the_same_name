@@ -11,7 +11,9 @@ I used Katalon Studio v10.3.2 on macOS 15.6.1
 
 I often make sub folders in the Test Cases tree to locate my test cases. I do change the name of my testcases. I do change the name of sub folders. I even move my testcases from a folder to another. I repeat such "refactoring" to seak for the best state of the Test Cases tree. During such refactoring, I encountered a serious defect of Katalon Studio.
 
-== step1
+== Description of the issue
+
+=== step1
 
 Initially, I had a testcase `Test Cases/main/TC1`. The code was as follows:
 
@@ -24,7 +26,7 @@ The script itself is not important here. What matters is that the Test Case `Tes
 
 image::{PAGES_URL}/images/step1.png[]
 
-Here's a fact you might not know: Katalon Studio's GUI gives the illusion that a test case is a single object containing Groovy scripts and metadata like “descriptions,” “tags,” and “variables.” However, on the filesystem, test cases are implemented as a combination of two folders (`Test Cases` and `Scripts`) and the files they contain. I inspected the file/folder tree of the project using the link:https://linux.die.net/man/1/tree[tree] command:
+Here's a fact you might not know: Katalon Studio's GUI gives the illusion that a test case is a single object containing a Groovy script and metadata like “descriptions,” “tags,” and “variables.” However, on the filesystem, test cases are implemented as a combination of two folders (`Test Cases` and `Scripts`) and the files they contain. I inspected the file/folder tree of the project using the link:https://linux.die.net/man/1/tree[tree] command:
 
 [source,shell]
 ----
@@ -36,12 +38,26 @@ Here you can clearly see that the Test Case `Test Cases/main/TC1` is represented
 
 [quote]
 ____
-What is `1761087607376` in the script file name? It is a timestamp representing the moment when the script file was created. Katalon Studio uses this timestamp to uniquely identify each script file.
+What is `1761087607376` as a part of the file name? It is a timestamp representing the moment when the script file was created. Katalon Studio uses this timestamp to uniquely identify each script file.
 ____
 
 === step2
 
+Next, I copied the `Test Cases/main/TC1` to make another test case `Test Cases/TC1`.
+
 image::{PAGES_URL}/images/step2.png[]
+
+I copied manually on the Katalon Studio GUI. I right-clicked over the `Test Cases/main/TC`, selected the "Copy" menu. Then I left-clicked the `Test Cases` foldr, right-click it, chose the "Paste" menu. Then I got a new test case `Test Cases/TC1`. It contained the same Groovy script code as the original `Test Cases/main/TC1`.
+
+Now, how the filesystem look like?
+
+[source,shell]
+----
+$ tree Scripts Test\ Cases
+include::./console/step2.txt[]
+----
+
+OK. There is no surprise.
 
 === step3
 
