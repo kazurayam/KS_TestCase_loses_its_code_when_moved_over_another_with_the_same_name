@@ -9,7 +9,7 @@
 
 I am going to retell my [previous post](https://forum.katalon.com/t/test-case-loses-its-code-when-moved-over-another-test-case-with-the-same-name/183734) with more details.
 
-I used Katalon Studio v10.3.2 on macOS 15.6.1
+I used Katalon Studio v10.3.2 Free on macOS 15.6.1
 
 ## Problem to solve
 
