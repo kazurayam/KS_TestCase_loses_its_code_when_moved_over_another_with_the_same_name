@@ -297,6 +297,16 @@ And I checked the timestamp of the files in the `Test Cases/main/TC1` folder aga
 
 I could clearly see that the `Script1761132105250.groovy` file was updated, while the `Script1761087607376.groovy` file remained unchanged. This means that the `Test Cases/main/TC1` is linked to the `Script1761132105250.groovy` file. The `Script1761087607376.groovy` will be left there forever as an orphaned file.
 
+### step10
+
+I looked into the orphaned `Test Cases/main/TC1/Script1761087607376.groovy` file using a text editor outside Katalon Stduio.
+
+<figure>
+<img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step10.png" alt="step10" />
+</figure>
+
+Ah! My script was still there! But Katalon Studio will never use this file again. This is really sad.
+
 ## Conclusion
 
 Katalon,

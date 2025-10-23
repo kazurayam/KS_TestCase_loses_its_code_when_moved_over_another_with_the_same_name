@@ -216,14 +216,16 @@ include::console/step9-2.txt[]
 
 I could clearly see that the `Script1761132105250.groovy` file was updated, while the `Script1761087607376.groovy` file remained unchanged. This means that the `Test Cases/main/TC1` is linked to the `Script1761132105250.groovy` file. The `Script1761087607376.groovy` will be left there forever as an orphaned file.
 
+=== step10
+
+I looked into the orphaned `Test Cases/main/TC1/Script1761087607376.groovy` file using a text editor outside Katalon Stduio.
+
+image::{PAGES_URL}/images/step10.png[]
+
+Ah! My script was still there! But Katalon Studio will never use this file again. This is really sad.
+
 == Conclusion
 
 Katalon,
 
 Please fix these bugs. Review the step3 and the step6. These bugs have been left unresolved long for years (see https://forum.katalon.com/t/bug-failed-renaming-test-case-deletes-content/9835). I hope you will take this issue seriously and fix it as soon as possible. Many Katalon Studio users may have lost their valuable test case codes unknowingly because of these bugs.
-
-
-
-
-
-
