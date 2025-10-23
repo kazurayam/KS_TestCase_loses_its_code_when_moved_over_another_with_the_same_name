@@ -222,7 +222,7 @@ I looked into the orphaned `Test Cases/main/TC1/Script1761087607376.groovy` file
 
 image::{PAGES_URL}/images/step10.png[]
 
-Ah! My script was still there! But Katalon Studio will never use this file again. This is really sad.
+Ah! My script was still there! But Katalon Studio will never recognize this file again. This is really sad.
 
 == Conclusion
 

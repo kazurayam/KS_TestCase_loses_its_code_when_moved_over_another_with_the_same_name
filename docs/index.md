@@ -305,7 +305,7 @@ I looked into the orphaned `Test Cases/main/TC1/Script1761087607376.groovy` file
 <img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step10.png" alt="step10" />
 </figure>
 
-Ah! My script was still there! But Katalon Studio will never use this file again. This is really sad.
+Ah! My script was still there! But Katalon Studio will never recognize this file again. This is really sad.
 
 ## Conclusion
 
