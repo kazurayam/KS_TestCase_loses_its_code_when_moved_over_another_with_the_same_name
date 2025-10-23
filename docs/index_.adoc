@@ -220,7 +220,7 @@ I could clearly see that the `Script1761132105250.groovy` file was updated, whil
 
 Katalon,
 
-Please fix the bugs. Review the step3 and the step6. These issues as been left unresolved long for years (see https://forum.katalon.com/t/bug-failed-renaming-test-case-deletes-content/9835). I hope you will take this issue seriously and fix it as soon as possible. Many Katalon Studio users may have lost their valuable test case codes unknowingly because of these bugs.
+Please fix these bugs. Review the step3 and the step6. These bugs have been left unresolved long for years (see https://forum.katalon.com/t/bug-failed-renaming-test-case-deletes-content/9835). I hope you will take this issue seriously and fix it as soon as possible. Many Katalon Studio users may have lost their valuable test case codes unknowingly because of these bugs.
 
 
 
