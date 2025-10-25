@@ -192,7 +192,7 @@ $ tree Scripts Test\ Cases
 include::console/step8.txt[]
 ----
 
-The `Test Cases/main/TC1 (1)` has got a Groovy script file `Script1761135512422.groovy`.
+Katalon Studio newly created the `Test Cases/main/TC1 (1)/Script1761135512422.groovy`.
 
 === step9
 

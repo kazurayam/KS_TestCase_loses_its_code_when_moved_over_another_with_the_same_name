@@ -267,7 +267,7 @@ I checked the filesystem again.
 
     6 directories, 5 files
 
-The `Test Cases/main/TC1 (1)` has got a Groovy script file `Script1761135512422.groovy`.
+Katalon Studio newly created the `Test Cases/main/TC1 (1)/Script1761135512422.groovy`.
 
 ### step9
 
@@ -295,7 +295,7 @@ And I checked the timestamp of the files in the `Test Cases/main/TC1` folder aga
     -rw-r--r--@ 1 kazuakiurayama  staff   245 10 22 08:01 Script1761087607376.groovy
     -rw-r--r--@ 1 kazuakiurayama  staff  1410 10 23 08:41 Script1761132105250.groovy
 
-I could clearly see that the `Script1761132105250.groovy` file was updated, while the `Script1761087607376.groovy` file remained unchanged. This means that the `Test Cases/main/TC1` is linked to the `Script1761132105250.groovy` file. The `Script1761087607376.groovy` will be left there forever as an orphaned file.
+I could clearly see that the `Script1761132105250.groovy` file was updated, while the `Script1761087607376.groovy` file remained unchanged. This means that the `Test Cases/main/TC1` is linked to the `Script1761132105250.groovy` file. The `Script1761087607376.groovy` will be left there as an orphaned file.
 
 ### step10
 
@@ -305,7 +305,7 @@ I looked into the orphaned `Test Cases/main/TC1/Script1761087607376.groovy` file
 <img src="https://kazurayam.github.io/KS_TestCase_loses_its_code_when_moved_over_another_with_the_same_name/images/step10.png" alt="step10" />
 </figure>
 
-Ah! My script was still there! But Katalon Studio will never recognize this file again. This is really sad.
+Ah! My script was still there in the filesystem! But Katalon Studio will never recognize this file again. This is really sad.
 
 ## Conclusion
 
